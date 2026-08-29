@@ -30,8 +30,3 @@ jobs:
 
       - name: Executar bot
         run: npm start
-        env:
-          # Adicione aqui somente os secrets que seu bot realmente usa:
-          # WHATSAPP_TOKEN: ${{ secrets.WHATSAPP_TOKEN }}
-          # MERCADO_LIVRE_TOKEN: ${{ secrets.MERCADO_LIVRE_TOKEN }}
-          # OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
