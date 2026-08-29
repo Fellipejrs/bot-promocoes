@@ -1,0 +1,37 @@
+name: Bot de Promoções
+
+on:
+  workflow_dispatch: # permite testar pelo botão "Run workflow"
+  schedule:
+    # 08h a 20h no horário de Brasília (UTC-3)
+    - cron: "0 11-23 * * *"
+    # 21h e 22h no horário de Brasília (UTC-3)
+    - cron: "0 0-1 * * *"
+
+permissions:
+  contents: read
+
+jobs:
+  executar-bot:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Baixar código
+        uses: actions/checkout@v6
+
+      - name: Preparar Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: "22"
+          cache: "npm"
+
+      - name: Instalar dependências
+        run: npm ci
+
+      - name: Executar bot
+        run: npm start
+        env:
+          # Adicione aqui somente os secrets que seu bot realmente usa:
+          # WHATSAPP_TOKEN: ${{ secrets.WHATSAPP_TOKEN }}
+          # MERCADO_LIVRE_TOKEN: ${{ secrets.MERCADO_LIVRE_TOKEN }}
+          # OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
